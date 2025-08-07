@@ -1,0 +1,92 @@
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+
+// ----------------------------------------------------------------------
+
+export const StyledLabel = styled(Box)(({ theme, ownerState: { color, variant } }) => {
+  const defaultColor = {
+    ...(color === 'default' && {
+      /**
+       * @variant filled
+       */
+      ...(variant === 'filled' && {
+        color: theme.vars.palette.common.white,
+        backgroundColor: theme.vars.palette.text.primary,
+      }),
+      /**
+       * @variant outlined
+       */
+      ...(variant === 'outlined' && {
+        backgroundColor: 'transparent',
+        color: theme.vars.palette.text.primary,
+        border: `2px solid ${theme.vars.palette.text.primary}`,
+      }),
+      /**
+       * @variant soft
+       */
+      ...(variant === 'soft' && {
+        color: theme.vars.palette.text.secondary,
+      }),
+      /**
+       * @variant inverted
+       */
+      ...(variant === 'inverted' && {
+        color: theme.vars.palette.grey[800],
+        backgroundColor: theme.vars.palette.grey[300],
+      }),
+    }),
+  };
+
+  const styleColors = {
+    ...(color !== 'default' && {
+      /**
+       * @variant filled
+       */
+      ...(variant === 'filled' && {
+        color: theme.vars.palette[color].contrastText,
+        backgroundColor: theme.vars.palette[color].main,
+      }),
+      /**
+       * @variant outlined
+       */
+      ...(variant === 'outlined' && {
+        backgroundColor: 'transparent',
+        color: theme.vars.palette[color].main,
+        border: `2px solid ${theme.vars.palette[color].main}`,
+      }),
+      /**
+       * @variant soft
+       */
+      ...(variant === 'soft' && {
+        color: theme.vars.palette[color].dark,
+      }),
+      /**
+       * @variant inverted
+       */
+      ...(variant === 'inverted' && {
+        color: theme.vars.palette[color].darker,
+        backgroundColor: theme.vars.palette[color].lighter,
+      }),
+    }),
+  };
+
+  return {
+    height: 24,
+    minWidth: 24,
+    lineHeight: 0,
+    cursor: 'default',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    display: 'inline-flex',
+    justifyContent: 'center',
+    padding: theme.spacing(0, 0.75),
+    fontSize: theme.typography.pxToRem(12),
+    fontWeight: theme.typography.fontWeightBold,
+    borderRadius: theme.shape.borderRadius * 0.75,
+    transition: theme.transitions.create('all', {
+      duration: theme.transitions.duration.shorter,
+    }),
+    ...defaultColor,
+    ...styleColors,
+  };
+});
